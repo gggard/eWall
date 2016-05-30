@@ -1,0 +1,8 @@
+{
+  "generator-react-webpack": {
+    "appName": "eWall",
+    "style": "sass",
+    "postcss": true,
+    "generatedWithVersion": 3
+  }
+}

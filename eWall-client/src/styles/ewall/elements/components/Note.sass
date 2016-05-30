@@ -1,0 +1,28 @@
+.note-component
+  background-color: yellow
+  width: 100px
+  height: 50px
+  color: black
+
+  box-shadow: 4px 4px 15px 0px rgba(214,214,214,1)
+
+  padding: 5px
+  text-align: center
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .form-control
+    padding: 0
+    height: 100%
+
+.note-component-content
+   p
+     margin: 0
+
+.note-component-selected
+  @extend .note-component
+  background-color: red
+
+.note-toolbar
+   height: 1em
