@@ -69,9 +69,11 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.9.1",
     "core-js": "^2.0.0",
     "json-loader": "^0.5.4",
     "node-sass": "^3.6.0",
+    "node-uuid": "^1.4.7",
     "normalize.css": "^4.0.0",
     "react": "^15.0.0",
     "react-bootstrap": "^0.29.2",
@@ -88,6 +90,7 @@
     "redux": "^3.5.2",
     "slick-carousel": "^1.5.9",
     "socket.io": "^1.4.6",
+    "socket.io-client": "^1.4.6",
     "whatwg-fetch": "^1.0.0"
   }
 }
