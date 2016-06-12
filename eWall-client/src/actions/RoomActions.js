@@ -44,7 +44,7 @@ class RoomActions {
    return (dispatch) => {
      dispatch();
      RoomSource.deleteNote(room._id, note._id)
-        .then((room) => {console.log("deleteNote then")})
+        .then((room) => {console.log("deleteNote then ", room)})
         .catch((errorMessage) => {
           console.log('catch...', errorMessage);
           this.roomFailed(errorMessage);

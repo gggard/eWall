@@ -80,7 +80,7 @@ class NoteComponent extends React.Component {
 
   handleDelete() {
     //console.log('delete');
-    this.props.onDelete(this);
+    this.props.onDelete(this.state.note);
   }
 
     handleEdit() {

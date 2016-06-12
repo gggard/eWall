@@ -31,7 +31,6 @@ class WorkspaceComponent extends React.Component {
 
     constructor(props) {
       super(props);
-      this.addNote = this.addNote.bind(this)
       this.onSelect = this.onSelect.bind(this)
       this.onDelete = this.onDelete.bind(this)
       this.onMove = this.onMove.bind(this)
@@ -39,10 +38,6 @@ class WorkspaceComponent extends React.Component {
       console.log('WorkspaceComponent constructor', props)
     }
 
-  addNote() {
-    console.log('Workspace : addNote', this);
-    this.setState({ notes : this.state.notes.concat({id : uuid.v4(), name : 'new' })});
-  }
 
   onSelect(note) {
     if (this.state.selectedNote)
@@ -64,7 +59,7 @@ class WorkspaceComponent extends React.Component {
     console.log('delete ', note);
     if (this.state.selectedNote && !(this.state.selectedNote===note)) this.setState({ selectedNote : null });
 
-    this.props.onDelete(note);
+    this.props.onNoteDelete(note);
 /*
     for(var i = this.props.notes.length - 1; i >= 0; i--) {
       console.log('check index ', i, this.props.notes[i]);

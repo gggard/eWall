@@ -97,8 +97,6 @@ class RoomComponent extends React.Component {
 
   onAddNote() {
     RoomActions.createNote(this.state.room);
-    console.log('On add note');
-
   }
 
   onNoteMove(note, newX, newY) {
@@ -110,7 +108,7 @@ class RoomComponent extends React.Component {
   }
 
   onNoteDelete(note) {
-    RoomActions.delete(this.state.room, note);
+    RoomActions.deleteNote(this.state.room, note);
   }
 
 

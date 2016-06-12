@@ -17,6 +17,21 @@ var RoomSource = {
     })
   },
 
+  deleteNote: function(roomId, noteId) {
+    return new Promise(function (resolve, reject) {
+      fetch('http://localhost:9090/api/rooms/'+roomId+'/notes/'+noteId, {
+          method: 'DELETE',
+          headers: {
+            'Authorization' : localStorage.getItem('jwt'),
+            'Content-Type': 'application/json'
+          }
+       })
+       .then (function(response) {
+         resolve({toto:1})
+       })
+    })
+  },
+
   moveNote: function(roomId, noteId, pos) {
     console.log('[RoomSource] moveNote', roomId, noteId, pos);
     return new Promise(function (resolve, reject) {

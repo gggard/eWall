@@ -5,6 +5,8 @@ var passport = require('passport');
 
 var Room = require('../models/room');
 
+var mongoose = require('mongoose');
+
 function getNote(req, res) {
   var roomId = req.params.roomId;
   var noteId = req.params.noteId;
@@ -20,6 +22,38 @@ function getNote(req, res) {
 }
 
 router.get('/:roomId/notes/:noteId', passport.authenticate('jwt', { session: false }), getNote);
+
+router.delete('/:roomId/notes/:noteId',
+          passport.authenticate('jwt', { session: false }),
+          function(req,res) {
+             var roomId = req.params.roomId;
+             var noteId = req.params.noteId;
+
+             Room.findOne({_id : roomId, 'notes._id' : noteId})
+               .exec(function (err, room) {
+                 if ((!room) || (err)) {
+                    res.status(404).send('Room not found');
+                    return;
+                 }
+
+                 for (var i = 0; i < room.notes.length; i++) {
+                   if (room.notes[i]._id == noteId) {
+                       room.notes.splice(i,1);
+                       break;
+                   }
+                 }
+
+                 room.save(function (err) {
+                   if (err) {
+                     res.status(404).send('Delete failed : '+err);
+                     return
+                   }
+
+                   res.send({success: 1});
+                 });
+              })
+          });
+
 
 router.post('/:roomId/notes/:noteId/position',
            passport.authenticate('jwt', { session: false }),
@@ -103,7 +137,9 @@ router.put('/:roomId/notes', passport.authenticate('jwt', { session: false }), f
   Room.findOne({_id : roomId})
     .exec(function (err, room) {
       if (err) res.status(404).send('Room not found');
-      room.notes.push({'content' : newNote.content,
+      var id = mongoose.Types.ObjectId();
+      room.notes.push({'_id' : id,
+                      'content' : newNote.content,
                        'type' : newNote.type,
                        'pos' : {
                          'x' : newNote.pos.x,
@@ -111,7 +147,8 @@ router.put('/:roomId/notes', passport.authenticate('jwt', { session: false }), f
                        }});
       room.save(function (err) {
           if (err) res.status(404).send('Error with mongo'+err);
-          res.redirect('/toto');
+          //res.redirect('/toto');
+          res.send(room.notes.filter((n) => n._id==id)[0]);
       });
     });
 

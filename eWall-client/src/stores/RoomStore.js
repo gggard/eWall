@@ -8,7 +8,8 @@ class RoomStore {
     this.bindListeners({
       handleUpdateRoom: RoomActions.UPDATE_ROOM,
       handleFetch : RoomActions.FETCH,
-      handleRoomFailed: RoomActions.ROOM_FAILED
+      handleRoomFailed: RoomActions.ROOM_FAILED,
+      handleDeleteNote: RoomActions.DELETE_NOTE
     });
   }
 
@@ -18,6 +19,17 @@ class RoomStore {
   }
 
   handleFetch() {
+  }
+
+  handleDeleteNote(noteId) {
+    console.log('[RoomStore] handleDeleteNote', noteId)
+    for (var i = 0; i < this.room.notes.length; i++) {
+      if (this.room.notes[i]._id == noteId) {
+          this.room.notes.splice(i,1);
+          break;
+      }
+    }
+
   }
 
 
